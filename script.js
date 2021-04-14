@@ -3,7 +3,11 @@ var numbers = document.querySelectorAll('.number'),
   operations = document.querySelectorAll('.operations'),
   dec = document.getElementById('decimal'),
   clearBtns = document.querySelectorAll('.clear_btn'),
-  resultBtn = document.getElementById('result')
+  resultBtn = document.getElementById('result'),
+  calcDisplay = document.getElementById('calc_Display_Input'),
+  memoryCurrentNumber = 0,
+  memoryNewNumber = false
+  memoryPendingOperation = '';
 
 //add event hadlers
 
@@ -30,9 +34,15 @@ for (var i = 0; i < clearBtns.length; i++) {
 
 dec.addEventListener('click', decimal)
 
-resultBtn.addEventListener('click', result)
+resultBtn.addEventListener('click', result) 
 
 function numberPress(number) {
+  if (calcDisplay.value === '0') {
+    calcDisplay.value = number
+  } else {
+    calcDisplay.value += number
+  }
+
   console.log('Клик по кнопке c цифрой ' + number)
 }
 
