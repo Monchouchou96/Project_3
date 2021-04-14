@@ -1,37 +1,57 @@
 //add variables
-var numbers = document.querySelectorAll ('.number'),
-    operation = document.querySelectorAll ('.operations'),
-    dec = document.getElementById('decimal'),
-    ce = document.getElementById('ce'),
-    c = document.getElementById('c'),
-    result = document.getElementById('.result');
-    
-    console.log(dec)
-    console.log(ce)
-    console.log(c)
-    console.log(result)
-    console.log (numbers)
-    console.log (operation)
-    
+var numbers = document.querySelectorAll('.number'),
+  operations = document.querySelectorAll('.operations'),
+  dec = document.getElementById('decimal'),
+  clearBtns = document.querySelectorAll('.clear_btn'),
+  resultBtn = document.getElementById('result')
+
 //add event hadlers
 
-
-/* function numberPress () {
-
+for (var i = 0; i < numbers.length; i++) {
+  var num = numbers[i]
+  num.addEventListener('click', function (test){
+    numberPress(test.target.textContent)
+  })
 }
 
-function operation () {
-
+for (var i = 0; i < operations.length; i++) {
+  var oper = operations[i]
+  oper.addEventListener('click', function (test) {
+    operationPress(test.target.textContent)  
+  })
 }
 
-function decimal () {
-
+for (var i = 0; i < clearBtns.length; i++) {
+  var cleanBtn = clearBtns[i]
+  cleanBtn.addEventListener('click', function (test) {
+    clear(test.target.id)
+  })
 }
 
-function clearAll () {
+dec.addEventListener('click', decimal)
 
+resultBtn.addEventListener('click', result)
+
+function numberPress(number) {
+  console.log('Клик по кнопке c цифрой ' + number)
 }
 
-function  () {
+function operationPress(symbol) {
+  console.log('Клик по кнопке с операцией ' + symbol )
+}
 
-} */
+function clear(id) {
+  console.log('click on ' + id + ' !')
+}
+
+function decimal() {
+  console.log('Клик по кнопке точка')
+}
+
+function result() {
+  console.log('Клик по кнопке равно')
+}
+
+/* function  () {
+
+}  */
