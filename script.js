@@ -5,15 +5,15 @@ var numbers = document.querySelectorAll('.number'),
   clearBtns = document.querySelectorAll('.clear_btn'),
   resultBtn = document.getElementById('result'),
   calcDisplay = document.getElementById('calc_Display_Input'),
-  memoryCurrentNumber = 0,
-  memoryNewNumber = false
-  memoryPendingOperation = '';
+  MemoryCurrentNumber = 0,
+  MemoryNewNumber = false
+    MemoryPendingOperation = ''
 
 //add event hadlers
 
 for (var i = 0; i < numbers.length; i++) {
   var num = numbers[i]
-  num.addEventListener('click', function (test){
+  num.addEventListener('click', function (test) {
     numberPress(test.target.textContent)
   })
 }
@@ -21,7 +21,7 @@ for (var i = 0; i < numbers.length; i++) {
 for (var i = 0; i < operations.length; i++) {
   var oper = operations[i]
   oper.addEventListener('click', function (test) {
-    operationPress(test.target.textContent)  
+    operationPress(test.target.textContent)
   })
 }
 
@@ -34,34 +34,69 @@ for (var i = 0; i < clearBtns.length; i++) {
 
 dec.addEventListener('click', decimal)
 
-resultBtn.addEventListener('click', result) 
+resultBtn.addEventListener('click', result)
 
 function numberPress(number) {
-  if (calcDisplay.value === '0') {
+  if (MemoryNewNumber) {
     calcDisplay.value = number
+    MemoryNewNumber = false
   } else {
-    calcDisplay.value += number
+    if (calcDisplay.value === '0') {
+      calcDisplay.value = number
+    } else {
+      calcDisplay.value += number
+    }
   }
-
-  console.log('Клик по кнопке c цифрой ' + number)
 }
 
 function operationPress(symbol) {
-  console.log('Клик по кнопке с операцией ' + symbol )
+  let localOperationMemory = calcDisplay.value
+
+  if (MemoryNewNumber && MemoryPendingOperation !== '=') {
+    calcDisplay.value = MemoryCurrentNumber
+  } else {
+    MemoryNewNumber = true
+    if (MemoryPendingOperation === '+') {
+      MemoryCurrentNumber += parseFloat(localOperationMemory)
+    } else if (MemoryPendingOperation === '-') {
+      MemoryCurrentNumber -= parseFloat(localOperationMemory)
+    } else if (MemoryPendingOperation === '*') {
+      MemoryCurrentNumber *= parseFloat(localOperationMemory)
+    } else if (MemoryPendingOperation === '/') {
+      MemoryCurrentNumber /= parseFloat(localOperationMemory)
+    } else {
+      MemoryCurrentNumber = parseFloat(localOperationMemory)
+    }
+    calcDisplay.value = MemoryCurrentNumber
+    MemoryPendingOperation = symbol
+  }
 }
+
+function decimal(argument) {
+  var localDecimalMemory = calcDisplay.value
+
+  if (MemoryNewNumber) {
+    localDecimalMemory = '0.'
+    MemoryNewNumber = false
+  } else {
+    if (localDecimalMemory.indexOf('.') === -1) {
+      localDecimalMemory += '.'
+    }
+  }
+  calcDisplay.value = localDecimalMemory
+}
+
 
 function clear(id) {
-  console.log('click on ' + id + ' !')
+  if (id == 'ce') {
+    calcDisplay.value = '0'
+    MemoryNewNumber = true
+  } else if (id === 'c') {
+    calcDisplay.value = '0'
+    MemoryNewNumber = true
+    MemoryCurrentNumber = 0; 
+    MemoryPendingOperation = ''
+  }
+  
 }
 
-function decimal() {
-  console.log('Клик по кнопке точка')
-}
-
-function result() {
-  console.log('Клик по кнопке равно')
-}
-
-/* function  () {
-
-}  */
