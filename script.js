@@ -56,16 +56,22 @@ function PressOperation(symbol) {
     calcDisplay.value = MemoryCurrentNumber
   } else {
     MemoryNewNumber = true
-    if (MemoryPendingOperation === '+') {
-      MemoryCurrentNumber += parseFloat(localOperationMemory)
-    } else if (MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= parseFloat(localOperationMemory)
-    } else if (MemoryPendingOperation === '*') {
-      MemoryCurrentNumber *= parseFloat(localOperationMemory)
-    } else if (MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= parseFloat(localOperationMemory)
-    } else {
-      MemoryCurrentNumber = parseFloat(localOperationMemory)
+    switch (MemoryPendingOperation) {
+      case MemoryPendingOperation === '+':
+        MemoryCurrentNumber += parseFloat(localOperationMemory)
+      break
+      case MemoryPendingOperation === '-':
+        MemoryCurrentNumber -= parseFloat(localOperationMemory)
+      break
+      case MemoryPendingOperation === '*':
+       MemoryCurrentNumber -= parseFloat(localOperationMemory)
+      break
+      case MemoryPendingOperation === '/':
+        MemoryCurrentNumber /= parseFloat(localOperationMemory)
+      break
+      case  MemoryCurrentNumber = parseFloat(localOperationMemory):
+        calcDisplay.value = MemoryCurrentNumber
+      break
     }
     calcDisplay.value = MemoryCurrentNumber
     MemoryPendingOperation = symbol
