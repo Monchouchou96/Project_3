@@ -7,7 +7,7 @@ let numbers = document.querySelectorAll('.number'),
   calcDisplay = document.getElementById('calcDisplayInput'),
   MemoryCurrentNumber = 0,
   MemoryNewNumber = false
-  MemoryPendingOperation = ''
+MemoryPendingOperation = ''
 
 //add event hadlers
 
@@ -59,19 +59,19 @@ function PressOperation(symbol) {
     switch (MemoryPendingOperation) {
       case MemoryPendingOperation === '+':
         MemoryCurrentNumber += parseFloat(localOperationMemory)
-      break
+        break
       case MemoryPendingOperation === '-':
         MemoryCurrentNumber -= parseFloat(localOperationMemory)
-      break
+        break
       case MemoryPendingOperation === '*':
-       MemoryCurrentNumber -= parseFloat(localOperationMemory)
-      break
+        MemoryCurrentNumber -= parseFloat(localOperationMemory)
+        break
       case MemoryPendingOperation === '/':
         MemoryCurrentNumber /= parseFloat(localOperationMemory)
-      break
-      case  MemoryCurrentNumber = parseFloat(localOperationMemory):
+        break
+      case (MemoryCurrentNumber = parseFloat(localOperationMemory)):
         calcDisplay.value = MemoryCurrentNumber
-      break
+        break
     }
     calcDisplay.value = MemoryCurrentNumber
     MemoryPendingOperation = symbol
