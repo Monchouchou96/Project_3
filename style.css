@@ -10,7 +10,7 @@ body {
   font-size: 20px;
 }
 
-.calculator {
+.calculatorSection {
   margin-left: 300px;
   margin-top: 150px;
   padding: 50px;
@@ -40,18 +40,17 @@ input {
   padding-left: 30px;
 }
 
-.math {
+.displayAndClearBtns {
   display: flex;
   flex-direction: row-reverse;
- 
 }
 
-.cleaning {
-  display: flex; 
+.cleaningBtns {
+  display: flex;
   flex-direction: column;
 }
 
-.numbers {
+.numberSectionBtns {
   display: flex;
   flex-wrap: wrap;
   width: 370px;
@@ -81,9 +80,8 @@ button:hover {
   transition: 0.5s linear;
 }
 
-#c {
+#clearBtnC {
   background-color: rgba(197, 48, 48, 0.986);
   text-transform: uppercase;
   font-family: Georgia, serif;
 }
-

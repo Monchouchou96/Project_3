@@ -1,32 +1,32 @@
 //add variables
-var numbers = document.querySelectorAll('.number'),
+let numbers = document.querySelectorAll('.number'),
   operations = document.querySelectorAll('.operations'),
   dec = document.getElementById('decimal'),
-  clearBtns = document.querySelectorAll('.clear_btn'),
+  clearBtns = document.querySelectorAll('.clearBtn'),
   resultBtn = document.getElementById('result'),
-  calcDisplay = document.getElementById('calc_Display_Input'),
+  calcDisplay = document.getElementById('calcDisplayInput'),
   MemoryCurrentNumber = 0,
   MemoryNewNumber = false
-    MemoryPendingOperation = ''
+  MemoryPendingOperation = ''
 
 //add event hadlers
 
-for (var i = 0; i < numbers.length; i++) {
-  var num = numbers[i]
+for (let i = 0; i < numbers.length; i++) {
+  let num = numbers[i]
   num.addEventListener('click', function (test) {
     numberPress(test.target.textContent)
   })
 }
 
-for (var i = 0; i < operations.length; i++) {
-  var oper = operations[i]
+for (let i = 0; i < operations.length; i++) {
+  let oper = operations[i]
   oper.addEventListener('click', function (test) {
     operationPress(test.target.textContent)
   })
 }
 
-for (var i = 0; i < clearBtns.length; i++) {
-  var cleanBtn = clearBtns[i]
+for (let i = 0; i < clearBtns.length; i++) {
+  let cleanBtn = clearBtns[i]
   cleanBtn.addEventListener('click', function (test) {
     clear(test.target.id)
   })
@@ -36,7 +36,7 @@ dec.addEventListener('click', decimal)
 
 resultBtn.addEventListener('click', result)
 
-function numberPress(number) {
+function PressNumber(number) {
   if (MemoryNewNumber) {
     calcDisplay.value = number
     MemoryNewNumber = false
@@ -49,7 +49,7 @@ function numberPress(number) {
   }
 }
 
-function operationPress(symbol) {
+function PressOperation(symbol) {
   let localOperationMemory = calcDisplay.value
 
   if (MemoryNewNumber && MemoryPendingOperation !== '=') {
@@ -73,30 +73,27 @@ function operationPress(symbol) {
 }
 
 function decimal(argument) {
-  var localDecimalMemory = calcDisplay.value
+  let localDecimalMemory = calcDisplay.value
 
   if (MemoryNewNumber) {
     localDecimalMemory = '0.'
     MemoryNewNumber = false
   } else {
-    if (localDecimalMemory.indexOf('.') === -1) {
+    if (localDecimalMemory.includes('.') === -1) {
       localDecimalMemory += '.'
     }
   }
   calcDisplay.value = localDecimalMemory
 }
 
-
-function clear(id) {
-  if (id == 'ce') {
+function clear(button) {
+  if (button == 'clearBtnCE') {
     calcDisplay.value = '0'
     MemoryNewNumber = true
-  } else if (id === 'c') {
+  } else if (button === 'clearBtnC') {
     calcDisplay.value = '0'
     MemoryNewNumber = true
-    MemoryCurrentNumber = 0; 
+    MemoryCurrentNumber = 0
     MemoryPendingOperation = ''
   }
-  
 }
-
