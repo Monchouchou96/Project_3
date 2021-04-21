@@ -1,4 +1,3 @@
-//add variables
 let numbers = document.querySelectorAll('.number'),
   operations = document.querySelectorAll('.operations'),
   dec = document.getElementById('decimal'),
@@ -6,22 +5,22 @@ let numbers = document.querySelectorAll('.number'),
   resultBtn = document.getElementById('result'),
   calcDisplay = document.getElementById('calcDisplayInput'),
   MemoryCurrentNumber = 0,
-  MemoryNewNumber = false
-MemoryPendingOperation = ''
+  MemoryNewNumber = false,
+  MemoryPendingOperation = ''
 
 //add event hadlers
 
 for (let i = 0; i < numbers.length; i++) {
   let num = numbers[i]
   num.addEventListener('click', function (test) {
-    numberPress(test.target.textContent)
+    PressNumber(test.target.textContent)
   })
 }
 
 for (let i = 0; i < operations.length; i++) {
   let oper = operations[i]
   oper.addEventListener('click', function (test) {
-    operationPress(test.target.textContent)
+    PressOperation(test.target.textContent)
   })
 }
 
@@ -50,31 +49,29 @@ function PressNumber(number) {
 }
 
 function PressOperation(symbol) {
-  let localOperationMemory = calcDisplay.value
-
+  let localOperationMemory = calcDisplay.value  
   if (MemoryNewNumber && MemoryPendingOperation !== '=') {
     calcDisplay.value = MemoryCurrentNumber
   } else {
     MemoryNewNumber = true
-    switch (MemoryPendingOperation) {
-      case MemoryPendingOperation === '+':
+    if (MemoryNewNumber && MemoryPendingOperation !== '=') {
+      calcDisplay.value = MemoryCurrentNumber
+    } else {
+      MemoryNewNumber = true
+      if (MemoryPendingOperation === '+') {
         MemoryCurrentNumber += parseFloat(localOperationMemory)
-        break
-      case MemoryPendingOperation === '-':
+      } else if (MemoryPendingOperation === '-') {
         MemoryCurrentNumber -= parseFloat(localOperationMemory)
-        break
-      case MemoryPendingOperation === '*':
-        MemoryCurrentNumber -= parseFloat(localOperationMemory)
-        break
-      case MemoryPendingOperation === '/':
+      } else if (MemoryPendingOperation === '*') {
+        MemoryCurrentNumber *= parseFloat(localOperationMemory)
+      } else if (MemoryPendingOperation === '/') {
         MemoryCurrentNumber /= parseFloat(localOperationMemory)
-        break
-      case (MemoryCurrentNumber = parseFloat(localOperationMemory)):
-        calcDisplay.value = MemoryCurrentNumber
-        break
+      } else {
+        MemoryCurrentNumber = parseFloat(localOperationMemory)
+      }
+      calcDisplay.value = MemoryCurrentNumber
+      MemoryPendingOperation = symbol
     }
-    calcDisplay.value = MemoryCurrentNumber
-    MemoryPendingOperation = symbol
   }
 }
 
