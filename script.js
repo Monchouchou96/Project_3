@@ -82,7 +82,7 @@ function decimal(argument) {
     localDecimalMemory.inculde('0.')
     MemoryNewNumber = false
   } else {
-    if (localDecimalMemory.indexOf('.')) {
+    if (localDecimalMemory.indexOf('.') == -1) {
       localDecimalMemory += '.'
     }
   }
