@@ -54,26 +54,27 @@ function PressOperation(symbol) {
     calcDisplay.value = MemoryCurrentNumber
   } else {
     MemoryNewNumber = true
-    if (MemoryNewNumber && MemoryPendingOperation !== '=') {
-      calcDisplay.value = MemoryCurrentNumber
-    } else {
-      MemoryNewNumber = true
-      if (MemoryPendingOperation === '+') {
+    switch (MemoryPendingOperation) {
+      case ('+'):
         MemoryCurrentNumber += parseFloat(localOperationMemory)
-      } else if (MemoryPendingOperation === '-') {
+      break
+      case ('-'):
         MemoryCurrentNumber -= parseFloat(localOperationMemory)
-      } else if (MemoryPendingOperation === '*') {
+      break
+      case ('*'):
         MemoryCurrentNumber *= parseFloat(localOperationMemory)
-      } else if (MemoryPendingOperation === '/') {
+      break
+      case ('/'):
         MemoryCurrentNumber /= parseFloat(localOperationMemory)
-      } else {
+      break
+      default:
         MemoryCurrentNumber = parseFloat(localOperationMemory)
-      }
+    }
       calcDisplay.value = MemoryCurrentNumber
       MemoryPendingOperation = symbol
     }
   }
-}
+
 
 function decimal(argument) {
   let localDecimalMemory = calcDisplay.value
