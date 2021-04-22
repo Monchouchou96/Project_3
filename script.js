@@ -79,10 +79,10 @@ function decimal(argument) {
   let localDecimalMemory = calcDisplay.value
 
   if (MemoryNewNumber) {
-    localDecimalMemory.inculde('0.')
+    localDecimalMemory = '0.'
     MemoryNewNumber = false
   } else {
-    if (localDecimalMemory.indexOf('.') == -1) {
+    if (!localDecimalMemory.includes('.')) {
       localDecimalMemory += '.'
     }
   }
