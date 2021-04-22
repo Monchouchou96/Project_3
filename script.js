@@ -1,12 +1,12 @@
-let numbers = document.querySelectorAll('.number'),
-  operations = document.querySelectorAll('.operations'),
-  dec = document.getElementById('decimal'),
-  clearBtns = document.querySelectorAll('.clearBtn'),
-  resultBtn = document.getElementById('result'),
-  calcDisplay = document.getElementById('calcDisplayInput'),
-  MemoryCurrentNumber = 0,
-  MemoryNewNumber = false,
-  MemoryPendingOperation = ''
+let numbers = document.querySelectorAll('.number')
+let operations = document.querySelectorAll('.operations')
+let dec = document.getElementById('decimal')
+let clearBtns = document.querySelectorAll('.clearBtn')
+let resultBtn = document.getElementById('result')
+let calcDisplay = document.getElementById('calcDisplayInput')
+let MemoryCurrentNumber = 0
+let MemoryNewNumber = false
+let MemoryPendingOperation = ''
 
 //add event hadlers
 
@@ -49,46 +49,46 @@ function PressNumber(number) {
 }
 
 function PressOperation(symbol) {
-  let localOperationMemory = calcDisplay.value  
+  let localOperationMemory = calcDisplay.value
   if (MemoryNewNumber && MemoryPendingOperation !== '=') {
     calcDisplay.value = MemoryCurrentNumber
   } else {
     MemoryNewNumber = true
     switch (MemoryPendingOperation) {
-      case ('+'):
+      case '+':
         MemoryCurrentNumber += parseFloat(localOperationMemory)
-      break
-      case ('-'):
+        break
+      case '-':
         MemoryCurrentNumber -= parseFloat(localOperationMemory)
-      break
-      case ('*'):
+        break
+      case '*':
         MemoryCurrentNumber *= parseFloat(localOperationMemory)
-      break
-      case ('/'):
+        break
+      case '/':
         MemoryCurrentNumber /= parseFloat(localOperationMemory)
-      break
+        break
       default:
         MemoryCurrentNumber = parseFloat(localOperationMemory)
     }
-      calcDisplay.value = MemoryCurrentNumber
-      MemoryPendingOperation = symbol
-    }
+    calcDisplay.value = MemoryCurrentNumber
+    MemoryPendingOperation = symbol
   }
-
+}
 
 function decimal(argument) {
   let localDecimalMemory = calcDisplay.value
 
   if (MemoryNewNumber) {
-    localDecimalMemory = '0.'
+    localDecimalMemory.inculde('0.')
     MemoryNewNumber = false
   } else {
-    if (localDecimalMemory.includes('.') === -1) {
+    if (localDecimalMemory.indexOf('.')) {
       localDecimalMemory += '.'
     }
   }
   calcDisplay.value = localDecimalMemory
 }
+
 
 function clear(button) {
   if (button == 'clearBtnCE') {
