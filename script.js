@@ -1,0 +1,103 @@
+let numbers = document.querySelectorAll('.number')
+let operations = document.querySelectorAll('.operations')
+let dec = document.getElementById('decimal')
+let clearBtns = document.querySelectorAll('.clearBtn')
+let resultBtn = document.getElementById('result')
+let calcDisplay = document.getElementById('calcDisplayInput')
+let MemoryCurrentNumber = 0
+let MemoryNewNumber = false
+let MemoryPendingOperation = ''
+
+//add event hadlers
+
+for (let i = 0; i < numbers.length; i++) {
+  let num = numbers[i]
+  num.addEventListener('click', function (test) {
+    PressNumber(test.target.textContent)
+  })
+}
+
+for (let i = 0; i < operations.length; i++) {
+  let oper = operations[i]
+  oper.addEventListener('click', function (test) {
+    PressOperation(test.target.textContent)
+  })
+}
+
+for (let i = 0; i < clearBtns.length; i++) {
+  let cleanBtn = clearBtns[i]
+  cleanBtn.addEventListener('click', function (test) {
+    clear(test.target.id)
+  })
+}
+
+dec.addEventListener('click', decimal)
+
+resultBtn.addEventListener('click', result)
+
+function PressNumber(number) {
+  if (MemoryNewNumber) {
+    calcDisplay.value = number
+    MemoryNewNumber = false
+  } else {
+    if (calcDisplay.value === '0') {
+      calcDisplay.value = number
+    } else {
+      calcDisplay.value += number
+    }
+  }
+}
+
+function PressOperation(symbol) {
+  let localOperationMemory = calcDisplay.value
+  if (MemoryNewNumber && MemoryPendingOperation !== '=') {
+    calcDisplay.value = MemoryCurrentNumber
+  } else {
+    MemoryNewNumber = true
+    switch (MemoryPendingOperation) {
+      case '+':
+        MemoryCurrentNumber += parseFloat(localOperationMemory)
+        break
+      case '-':
+        MemoryCurrentNumber -= parseFloat(localOperationMemory)
+        break
+      case '*':
+        MemoryCurrentNumber *= parseFloat(localOperationMemory)
+        break
+      case '/':
+        MemoryCurrentNumber /= parseFloat(localOperationMemory)
+        break
+      default:
+        MemoryCurrentNumber = parseFloat(localOperationMemory)
+    }
+    calcDisplay.value = MemoryCurrentNumber
+    MemoryPendingOperation = symbol
+  }
+}
+
+function decimal(argument) {
+  let localDecimalMemory = calcDisplay.value
+
+  if (MemoryNewNumber) {
+    localDecimalMemory = '0.'
+    MemoryNewNumber = false
+  } else {
+    if (!localDecimalMemory.includes('.')) {
+      localDecimalMemory += '.'
+    }
+  }
+  calcDisplay.value = localDecimalMemory
+}
+
+
+function clear(button) {
+  if (button == 'clearBtnCE') {
+    calcDisplay.value = '0'
+    MemoryNewNumber = true
+  } else if (button === 'clearBtnC') {
+    calcDisplay.value = '0'
+    MemoryNewNumber = true
+    MemoryCurrentNumber = 0
+    MemoryPendingOperation = ''
+  }
+}

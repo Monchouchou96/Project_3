@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  widows: 100%;
+  height: 100%;
+  background-color: rgb(218, 218, 218);
+  font-size: 20px;
+}
+
+.calculatorSection {
+  margin-left: 300px;
+  margin-top: 150px;
+  padding: 50px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 500px;
+  border: 3px solid black;
+  background-color: rgb(214, 238, 240);
+  border-radius: 2%;
+}
+
+input {
+  width: 330px;
+  height: 120px;
+  border-radius: 20px;
+  background-color: rgb(19, 112, 141);
+  border-color: black;
+  font-size: 40px;
+  color: rgb(145, 143, 143);
+  padding-left: 30px;
+}
+
+::placeholder {
+  font-size: 40px;
+  color: rgb(145, 143, 143);
+  padding-left: 30px;
+}
+
+.displayAndClearBtns {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.cleaningBtns {
+  display: flex;
+  flex-direction: column;
+}
+
+.numberSectionBtns {
+  display: flex;
+  flex-wrap: wrap;
+  width: 370px;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  background-color: rgb(71, 181, 214);
+  margin: 10px;
+  border-color: black;
+}
+
+button:hover {
+  background-color: #f06c64;
+  cursor: pointer;
+  transition: 0.5s linear;
+}
+
+#equally > button {
+  background-color: rgb(17, 158, 88);
+}
+
+#equally > button:hover {
+  background-color: #dbf064;
+  transition: 0.5s linear;
+}
+
+#clearBtnC {
+  background-color: rgba(197, 48, 48, 0.986);
+  text-transform: uppercase;
+  font-family: Georgia, serif;
+}
